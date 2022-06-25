@@ -2,8 +2,6 @@ async function loadCrashs() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    const dateTime = new Date().toLocaleString("pt-BR").padStart(2, '0').split(' ');
-
     const page = urlParams.get('pagina');;
 
     await fetch(`/${page ? `crash?page=${page}` : 'crash'}`, {
@@ -25,6 +23,8 @@ async function loadCrashs() {
             const crashDiv = document.createElement('div');
             const crashSpan = document.createElement('span');
             const crashP = document.createElement('p');
+
+            const dateTime = new Date(crash.createdAt).toLocaleString("pt-BR").padStart(2, '0').split(' ');
 
             crashDiv.classList = `${crash.bad_crash ? 'crash red' : 'crash'}`;
 
